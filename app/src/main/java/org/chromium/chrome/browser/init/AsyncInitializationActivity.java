@@ -152,7 +152,7 @@ public abstract class AsyncInitializationActivity extends AppCompatActivity impl
         if (mLaunchBehindWorkaround != null) mLaunchBehindWorkaround.onSetContentView();
     }
 
-    /** Controls the parameter of {@link NativeInitializationController#startBackgroundTasks()}.*/
+    /** Controls the parameter of {@link NativeInitializationController#()}.*/
     @VisibleForTesting
     public boolean shouldAllocateChildConnection() {
         return true;
