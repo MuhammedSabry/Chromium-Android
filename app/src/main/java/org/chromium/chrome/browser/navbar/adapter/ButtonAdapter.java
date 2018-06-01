@@ -3,10 +3,13 @@ package org.chromium.chrome.browser.navbar.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+
+import org.chromium.chrome.browser.navbar.fragment.FirstPageFragment;
 
 import java.util.List;
 
@@ -17,15 +20,17 @@ import java.util.List;
 public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
     private List<String> buttonNames;
-    private List<Drawable> buttonDrawables;
+    private List<Integer> buttonDrawables;
+    private FirstPageFragment fragment;
 
     /**
      * Initializes the ButtonNames list and ButtonDrawables list
      */
-    public ButtonAdapter(Context c, List<String> buttonNames, List<Drawable> buttonDrawables) {
+    public ButtonAdapter(Context c, List<String> buttonNames, @DrawableRes List<Integer> buttonDrawables, FirstPageFragment fragment) {
         mContext = c;
         this.buttonDrawables = buttonDrawables;
         this.buttonNames = buttonNames;
+        this.fragment = fragment;
     }
 
     public int getCount() {
@@ -37,7 +42,7 @@ public class ButtonAdapter extends BaseAdapter {
     }
 
     public long getItemId(int position) {
-        return 0;
+        return buttonDrawables.get(position);
     }
 
     // create a new ImageView for each item referenced by the Adapter
@@ -50,10 +55,16 @@ public class ButtonAdapter extends BaseAdapter {
             button.setText(buttonNames.get(position));
             button.setTextSize(12);
             button.setTextColor(Color.parseColor("#999999"));
+            button.setFocusable(false);
+            button.setFocusableInTouchMode(false);
+            button.setOnClickListener(v -> {
+                if (fragment != null)
+                    fragment.itemClicked(buttonDrawables.get(position));
+            });
         } else {
             button = (Button) convertView;
         }
-        button.setCompoundDrawablesWithIntrinsicBounds(null, buttonDrawables.get(position), null, null);
+        button.setCompoundDrawablesWithIntrinsicBounds(null, mContext.getResources().getDrawable(buttonDrawables.get(position), null), null, null);
         return button;
     }
 }

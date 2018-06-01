@@ -50,18 +50,18 @@ public class SecondPageFragment extends Fragment {
                 , "dummy");
 
         //Buttons Icons
-        List<Drawable> buttonDrawables = new ArrayList<>(6);
+        List<Integer> buttonDrawables = new ArrayList<>(6);
         Collections.addAll(buttonDrawables
-                , getResources().getDrawable(R.drawable.ic_dummy)
-                , getResources().getDrawable(R.drawable.ic_dummy)
-                , getResources().getDrawable(R.drawable.ic_dummy)
-                , getResources().getDrawable(R.drawable.ic_dummy)
-                , getResources().getDrawable(R.drawable.ic_dummy)
-                , getResources().getDrawable(R.drawable.ic_dummy));
+                , R.drawable.ic_dummy
+                , R.drawable.ic_dummy
+                , R.drawable.ic_dummy
+                , R.drawable.ic_dummy
+                , R.drawable.ic_dummy
+                , R.drawable.ic_dummy);
 
         //GridView Instantiation
         GridView gridView = view.findViewById(R.id.mainGridView);
-        gridView.setAdapter(new ButtonAdapter(this.getContext(), buttonNames, buttonDrawables));
+        gridView.setAdapter(new ButtonAdapter(this.getContext(), buttonNames, buttonDrawables, null));
     }
 
 }
